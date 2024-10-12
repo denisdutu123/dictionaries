@@ -31,6 +31,8 @@ def draw():
         v.draw()
         screen.draw.text(str(coun),(v.pos[0],v.pos[1]+25))
         coun+=1
+    for i in lin:
+        screen.draw.line(i[0],i[1],(127,206,99),width = 5)
     
     if nball < num:
         total = time.time() - sat
@@ -45,7 +47,7 @@ def on_mouse_down(pos):
     if nball < num:
         if bal[nball].collidepoint(pos):
             if nball:
-                lin.apend((bal[nball-1].pos, bal[nball].pos))
+                lin.append((bal[nball-1].pos, bal[nball].pos))
             nball = nball + 1
 position()
 

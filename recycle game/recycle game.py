@@ -16,8 +16,14 @@ items = []
 def draw():
     screen.clear()
     screen.blit("park.jpg",(0,0))
-    for item in items:
-        item.draw()
+    if ove:
+        screen.draw.text("Game Over", center = (550,350),fontsize = 60,color = "Red" )
+    elif fin:
+        screen.draw.text("You Won", center = (550,350),fontsize = 60,color = "Green" )
+    else:
+
+        for item in items:
+            item.draw()
 
 def update():
     pass
@@ -29,7 +35,8 @@ def over():
     ove = True
 def total(extra):
     ite = []
-    options = ["cardboard.png"] + random.choice(it,k = extra)
+    k = min(extra,len(it))
+    options = ["cardboard.png"] + random.sample(it,k = k)
     random.shuffle(options)
     for i in options:
         item = Actor(i)
@@ -38,9 +45,22 @@ def total(extra):
     for index, item in enumerate(ite):
         item.x = (index+1)*siz
         item.y = 0
-        animate(item,duration = sta - cur,on_finished = over,y=HEIGHT)
+        animate(item,duration = sta - cur,y=HEIGHT)
     return ite 
-
+def on_mouse_down(pos):
+    global items, cur, fin
+    for item in items:
+        if item.collidepoint(pos):
+            if "cardboard.png" in item.image:
+                if cur == lev:
+                    fin = True
+                else:
+                    cur+=1
+                    items.clear()
+            else:
+                over()
+                
+    
 
 
 

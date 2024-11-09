@@ -16,9 +16,14 @@ items = []
 def draw():
     screen.clear()
     screen.blit("park.jpg",(0,0))
+    for item in items:
+        item.draw()
 
 def update():
     pass
+    global items, cur
+    if len(items) == 0:
+        items = total(cur)
 def over():
     global ove
     ove = True
@@ -30,7 +35,11 @@ def total(extra):
         item = Actor(i)
         ite.append(item)
     siz = WIDTH/(len(ite)+1)
-
+    for index, item in enumerate(ite):
+        item.x = (index+1)*siz
+        item.y = 0
+        animate(item,duration = sta - cur,on_finished = over,y=HEIGHT)
+    return ite 
 
 
 

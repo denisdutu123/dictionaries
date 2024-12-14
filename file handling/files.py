@@ -1,0 +1,21 @@
+ope = open("file1.txt","r")
+re = ope.read()
+print(re)
+ope.close()
+ope = open("file1.txt","r")
+for i in ope:
+    print(i)
+ope.close()
+ope = open("file1.txt","r")
+re = ope.read(3)
+print(re)
+ope.close()
+# write mode
+ope = open("file1.txt","w")
+ope.write("bonjour\n")
+ope.write("ola\n")
+ope.close()
+#append mode
+ope = open("file1.txt","a")
+ope.write("no")
+ope.close()

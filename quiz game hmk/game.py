@@ -3,7 +3,7 @@ import pgzrun
 WIDTH = 900
 HEIGHT = 700
 
-TITLE = "Football quiz"
+TITLE = "5 for 5"
 ti = 10
 sc = 0
 qu = "text.txt"
@@ -22,17 +22,17 @@ tim = Rect(700,100,200,150)
 ski = Rect(700,250,225,450)
 answe = [ans1, ans2, ans3, ans4]
 def draw():
-    screen.draw.filled_rect(mbox,"Orange")
-    screen.draw.filled_rect(ques,"Blue")
-    screen.draw.filled_rect(tim,"Red")
-    screen.draw.filled_rect(ski,"Grey")
+    screen.draw.filled_rect(mbox,"Blue")
+    screen.draw.filled_rect(ques,"Red")
+    screen.draw.filled_rect(tim,"Orange")
+    screen.draw.filled_rect(ski,"Green")
     ind = 1
     for i in answe:
-        screen.draw.filled_rect(i,"Green")
-    marq = "Welcome to FT Quiz"
-    screen.draw.textbox(marq, mbox, color = "Pink")
-    screen.draw.textbox(str (ti), tim, color = "Light Green")
-    screen.draw.textbox("NEXT", ski, color = "Red", angle = -90)
+        screen.draw.filled_rect(i,"yellow")
+    marq = "Welcome to 5 for 5"
+    screen.draw.textbox(marq, mbox, color = "White")
+    screen.draw.textbox(str (ti), tim, color = "Purple")
+    screen.draw.textbox("SKIP", ski, color = "Red", angle = -90)
     screen.draw.textbox(question[0].strip(), ques, color = "Black")
     for i in answe:
         screen.draw.textbox(question[ind].strip(), i, color = "White")
@@ -58,9 +58,54 @@ def next():
     global question_i
     question_i+=1
     return questions.pop(0).split(",")
+def ov():
+    global  question, ti, sc, ove
+    marq = f"Gamer Over\n Your score is:{sc}"
+    question = [marq, "-", "-", "-","-","-",5]
+    ti = 0
+    ove = True
+def timi():
+    global ti
+    if ti > 0:
+        ti-=1
+    else:
+        ov()
+def answ():
+    global sc, ti, question, questions
+    sc+=1
+    if questions:
+        question = next()
+        ti = 10
+    else:
+        ov()
+def sk():
+    global question, questions, ti
+    if questions and not ove:
+        question = next()
+        ti = 10
+    else:
+        ov()
+def on_mouse_down(pos):
+    coun = 1
+    for i in answe:
+        if i.collidepoint(pos):
+            if coun == int(question[5]):
+                answ()
+            else:
+                ov()
+        coun+=1
+    if ski.collidepoint(pos):
+        sk()
+
+
+
+
+
+
+
 read()
 question = next()
-
+clock.schedule_interval(timi, 1)
 
 
 

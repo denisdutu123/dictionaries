@@ -3,8 +3,8 @@ import pgzrun
 WIDTH = 900
 HEIGHT = 700
 
-TITLE = "5 for 5"
-ti = 10
+TITLE = "Football Quiz"
+ti = 5
 sc = 0
 qu = "text.txt"
 ove = False
@@ -22,16 +22,16 @@ tim = Rect(700,100,200,150)
 ski = Rect(700,250,225,450)
 answe = [ans1, ans2, ans3, ans4]
 def draw():
-    screen.draw.filled_rect(mbox,"Blue")
-    screen.draw.filled_rect(ques,"Red")
-    screen.draw.filled_rect(tim,"Orange")
-    screen.draw.filled_rect(ski,"Green")
+    screen.draw.filled_rect(mbox,"Red")
+    screen.draw.filled_rect(ques,"Orange")
+    screen.draw.filled_rect(tim,"Yellow")
+    screen.draw.filled_rect(ski,"Purple")
     ind = 1
     for i in answe:
-        screen.draw.filled_rect(i,"yellow")
+        screen.draw.filled_rect(i,"Green")
     marq = "Welcome to 5 for 5"
     screen.draw.textbox(marq, mbox, color = "White")
-    screen.draw.textbox(str (ti), tim, color = "Purple")
+    screen.draw.textbox(str (ti), tim, color = "Pink")
     screen.draw.textbox("SKIP", ski, color = "Red", angle = -90)
     screen.draw.textbox(question[0].strip(), ques, color = "Black")
     for i in answe:
